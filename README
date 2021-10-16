@@ -1,0 +1,35 @@
+Ciobanu Dorin 321 CB
+
+TEMA 3 PC
+
+Pentru implementarea acestei teme am folosit si am preluat multe cunostinte din
+laboratorul 10 de HTTP Requests si Replyes. In general, nu am folosit JSON parser
+ci am incercat sa parsez singur cateva mesaje care erau mai usoare. Am parsat toate
+mesajele de eroare si le-am afisat human-readeble. Unele mesaje de la server mi s-au
+parut nasoale si le-am lasat asa, nu am reusit sa le parsez, cum ar fi lista de carti
+din functia get_books si get_book.
+
+Fisierele helpers.c requests.c buffer.c sunt din laborator, in mare parte nu am
+modificat nimic in ele. 
+
+Mai detaliat despre implementare:
+	Pentru HTTP Request-uri si Reply-uri am folosit functiile de la laborator, nu am
+	modificat nimic din ceea ce am implementat atunci. In fisierul client.c se afla
+	mai mult din tema (mainul acestei). Am facut un while infinit, care simuleaza ci-
+	tirea de la tastatura si asteapta niste comenzi (login,register si altele).
+	Initial am deschis o conexiune si m-am connectat la server prin portul 8080, apoi
+	in dependenta de comanda, eu trimit POST/GET/DELETE requesturi catre server si 
+	astept raspunsuri de la acesta, folosind functiile de la laborator (send_to_server
+	si receive_from_server). 
+
+	Pentru comanda login am extras cookies din payload si le-am salvat intr-un string
+	ca sa le folosesc mai departe la logout si enter_library. Daca fac logout, setez
+	cookies la NULL.
+
+	Pentru comanda enter_library folosesc cookies si afisez mesajul de la server.
+	Aceasta imi returneaza un JWT pe care la fel il salvez intr-un string.
+
+	Pentru comanda get_books/get_book/add_book folosesc JWT-ul obtinut de la comanda
+	enter_library si afisez mesajele obtinute.
+
+	Pentru logout inchid conexiunea de la server si fac free la niste buffere.
